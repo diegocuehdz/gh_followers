@@ -15,6 +15,7 @@
 		F132B29F2403953A005B302A /* FavoritesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F132B29E2403953A005B302A /* FavoritesListVC.swift */; };
 		F132B2A324039B10005B302A /* GFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F132B2A224039B10005B302A /* GFButton.swift */; };
 		F132B2A624039E60005B302A /* GFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F132B2A524039E60005B302A /* GFTextField.swift */; };
+		F1C595FB26CDC89B0045AFBC /* FollowerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C595FA26CDC89B0045AFBC /* FollowerListVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		F132B29E2403953A005B302A /* FavoritesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListVC.swift; sourceTree = "<group>"; };
 		F132B2A224039B10005B302A /* GFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFButton.swift; sourceTree = "<group>"; };
 		F132B2A524039E60005B302A /* GFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTextField.swift; sourceTree = "<group>"; };
+		F1C595FA26CDC89B0045AFBC /* FollowerListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 		F132B299240394EF005B302A /* Containers */ = {
 			isa = PBXGroup;
 			children = (
+				F1C595F926CDC8870045AFBC /* FollowerListVC */,
 				F132B29A240394FB005B302A /* SearchVC */,
 				F132B29D24039528005B302A /* FavoritesListVC */,
 			);
@@ -127,6 +130,14 @@
 				F132B2A524039E60005B302A /* GFTextField.swift */,
 			);
 			path = GFTextField;
+			sourceTree = "<group>";
+		};
+		F1C595F926CDC8870045AFBC /* FollowerListVC */ = {
+			isa = PBXGroup;
+			children = (
+				F1C595FA26CDC89B0045AFBC /* FollowerListVC.swift */,
+			);
+			path = FollowerListVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +214,7 @@
 				F132B29F2403953A005B302A /* FavoritesListVC.swift in Sources */,
 				F132B2A324039B10005B302A /* GFButton.swift in Sources */,
 				F132B29C24039508005B302A /* SearchVC.swift in Sources */,
+				F1C595FB26CDC89B0045AFBC /* FollowerListVC.swift in Sources */,
 				F132B28524038DFA005B302A /* AppDelegate.swift in Sources */,
 				F132B28724038DFA005B302A /* SceneDelegate.swift in Sources */,
 			);
