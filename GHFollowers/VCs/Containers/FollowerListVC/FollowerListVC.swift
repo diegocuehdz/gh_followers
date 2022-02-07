@@ -17,5 +17,7 @@ class FollowerListVC: UIViewController {
         
         navigationController?.isNavigationBarHidden = false
         view.backgroundColor = .systemBackground
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
 }

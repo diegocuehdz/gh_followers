@@ -20,6 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
         window?.windowScene = windowScene
         window?.rootViewController = createTabBar()
         window?.makeKeyAndVisible()
+        
+        configNavigationBar()
     }
     
     func createTabBar() -> UITabBarController
@@ -50,7 +52,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
         
         return UINavigationController(rootViewController: favoritesVC)
     }
-    
+   
+    func configNavigationBar() {
+        UINavigationBar.appearance().tintColor = .systemGreen
+    }
 
     func sceneDidDisconnect(_ scene: UIScene)
     {

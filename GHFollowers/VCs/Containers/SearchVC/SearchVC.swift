@@ -13,6 +13,7 @@ class SearchVC: UIViewController
     let img_Logo = UIImageView()
     let tf_UserName = GFTextField()
     let btn_Search = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
+    var isUserNameEntered: Bool { return !tf_UserName.text!.isEmpty }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,7 @@ class SearchVC: UIViewController
         setUp_ImgLogo()
         setUp_TfUserName()
         setUp_BtnSearch()
+        createDismissKeyboardTapGesture()
     }
     
     func setUp_ImgLogo() {
@@ -42,6 +44,11 @@ class SearchVC: UIViewController
             img_Logo.heightAnchor.constraint(equalToConstant: 200),
             img_Logo.widthAnchor.constraint(equalToConstant: 200)
         ])
+    }
+    
+    func createDismissKeyboardTapGesture() {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        self.view.addGestureRecognizer(tap)
     }
     
     func setUp_TfUserName() {
@@ -72,9 +79,11 @@ class SearchVC: UIViewController
     }
     
     @objc func click_Next(){
-        
+        guard isUserNameEntered else {
+            self.showGFAlertOnMainThread(title: "No Username!", message: "Please enter a valid username. We need who to look for 🙊", buttonTitle: "Ok")
+            return
+        }
         guard let searchUserName = tf_UserName.text else { return }
-        if searchUserName.isEmpty { return }
         
         let vcFollowers = FollowerListVC.init()
         vcFollowers.userName = searchUserName
