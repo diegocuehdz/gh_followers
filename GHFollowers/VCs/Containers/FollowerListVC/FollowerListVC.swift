@@ -9,15 +9,22 @@
 import UIKit
 
 class FollowerListVC: UIViewController {
-
+    
+    enum CollectionSectionDefault { case main }
+    
     var userName: String = ""
     var collectionView_Followers: UICollectionView!
+    var dataSourceDiff: UICollectionViewDiffableDataSource<CollectionSectionDefault, Follower>!
+    
+    var list_Followers: [Follower] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
         configViewController()
         configCollectionView()
-        loadData()
+        configDataSource()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,34 +39,40 @@ class FollowerListVC: UIViewController {
     }
     
     func loadData() {
-        NetworkManager.shared.getFollowers(for: userName, page: 1) { result in
+        NetworkManager.shared.service_GetFollowerList(for: userName, page: 1) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .failure(let error ):
                 self.showGFAlertOnMainThread(title: "API error", message: error.rawValue, buttonTitle: "Ok")
             case .success(let listFollowers):
+                self.list_Followers = listFollowers
+                self.updateData()
                 dump(listFollowers)
             }
         }
     }
     
     func configCollectionView() {
-        self.collectionView_Followers = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewFlowLayout())
+        self.collectionView_Followers = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
         view.addSubview(collectionView_Followers)
-        collectionView_Followers.backgroundColor = .systemPink
+        collectionView_Followers.backgroundColor = .systemBackground
         collectionView_Followers.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.kIdentifier)
     }
     
-    func createCollectionViewFlowLayout() -> UICollectionViewFlowLayout {
-        let width = view.bounds.width
-        let padding: CGFloat = 12
-        let minimumItemSpacing: CGFloat = 10
-        let numItemsPerRow: CGFloat = 3.0
-        let availableWidth = width - (padding * 2) - (minimumItemSpacing * 2)
-        let widthPerItem = availableWidth/numItemsPerRow
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        flowLayout.itemSize = CGSize(width: widthPerItem, height: widthPerItem + 40)
-        return flowLayout
+    func configDataSource() {
+        dataSourceDiff = UICollectionViewDiffableDataSource<CollectionSectionDefault, Follower>(collectionView: collectionView_Followers, cellProvider: { collectionView, indexPath, itemIdentifier in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCell.kIdentifier, for: indexPath) as! FollowerCell
+            cell.setUpInfo(itemIdentifier)
+            return cell
+        })
     }
     
+    func updateData() {
+        var snapshot = NSDiffableDataSourceSnapshot<CollectionSectionDefault, Follower>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(list_Followers)
+        DispatchQueue.main.async {
+            self.dataSourceDiff.apply(snapshot, animatingDifferences: true)
+        }
+    }
 }

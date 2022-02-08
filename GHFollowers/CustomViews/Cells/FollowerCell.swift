@@ -27,25 +27,22 @@ class FollowerCell: UICollectionViewCell
     
     func setUpInfo(_ follower: Follower) {
         lb_Username.text = follower.login
-        
+        img_Avatar.downloadImage(from: follower.avatarUrl)
     }
     
     private func config() {
         addSubview(img_Avatar)
         addSubview(lb_Username)
         
-        
         NSLayoutConstraint.activate([
-            img_Avatar.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
-            img_Avatar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            img_Avatar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            img_Avatar.topAnchor.constraint(equalTo: self.topAnchor, constant: padding),
+            img_Avatar.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding),
+            img_Avatar.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding),
             img_Avatar.heightAnchor.constraint(equalTo: img_Avatar.widthAnchor),
             
             lb_Username.topAnchor.constraint(equalTo: img_Avatar.bottomAnchor, constant: 12.0),
-            lb_Username.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            lb_Username.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            lb_Username.heightAnchor.constraint(equalToConstant: 20)
+            lb_Username.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding),
+            lb_Username.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding)
         ])
-        
     }
 }

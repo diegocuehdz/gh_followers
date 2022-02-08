@@ -26,6 +26,7 @@
 		F16ADA9627B1F9120002E45E /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16ADA9527B1F9120002E45E /* ErrorMessage.swift */; };
 		F16ADA9927B1FCE40002E45E /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16ADA9827B1FCE40002E45E /* FollowerCell.swift */; };
 		F16ADA9B27B1FD280002E45E /* GFImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16ADA9A27B1FD280002E45E /* GFImageView.swift */; };
+		F16ADA9D27B221390002E45E /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16ADA9C27B221390002E45E /* UIHelper.swift */; };
 		F1C595FB26CDC89B0045AFBC /* FollowerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C595FA26CDC89B0045AFBC /* FollowerListVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		F16ADA9527B1F9120002E45E /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		F16ADA9827B1FCE40002E45E /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		F16ADA9A27B1FD280002E45E /* GFImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFImageView.swift; sourceTree = "<group>"; };
+		F16ADA9C27B221390002E45E /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		F1C595FA26CDC89B0045AFBC /* FollowerListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -185,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				F16ADA9527B1F9120002E45E /* ErrorMessage.swift */,
+				F16ADA9C27B221390002E45E /* UIHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				F16ADA8427B1DCE90002E45E /* GFAlertViewVC.swift in Sources */,
 				F132B28524038DFA005B302A /* AppDelegate.swift in Sources */,
 				F16ADA9627B1F9120002E45E /* ErrorMessage.swift in Sources */,
+				F16ADA9D27B221390002E45E /* UIHelper.swift in Sources */,
 				F16ADA9327B1F0420002E45E /* NetworkManager.swift in Sources */,
 				F132B28724038DFA005B302A /* SceneDelegate.swift in Sources */,
 				F16ADA8B27B1E6AF0002E45E /* GFContainerView.swift in Sources */,
