@@ -22,7 +22,7 @@ class NetworkManager
             handler(.failure(.errorInvalidUrl))
             return
         }
-        
+
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let _ = error {
                 handler(.failure(.errorUnableToComplete))

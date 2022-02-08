@@ -12,18 +12,21 @@ class FollowerListVC: UIViewController {
     
     enum CollectionSectionDefault { case main }
     
-    var userName: String = ""
+    
     var collectionView_Followers: UICollectionView!
     var dataSourceDiff: UICollectionViewDiffableDataSource<CollectionSectionDefault, Follower>!
     
+    var userName: String = ""
     var list_Followers: [Follower] = []
-    
+    var page: Int = 1
+    var hasMoreFollowers = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadData()
+        
         configViewController()
         configCollectionView()
+        loadData(userName: userName, page: page)
         configDataSource()
     }
     
@@ -38,16 +41,23 @@ class FollowerListVC: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    func loadData() {
-        NetworkManager.shared.service_GetFollowerList(for: userName, page: 1) { [weak self] result in
+    func loadData(userName: String, page: Int) {
+        showLoading()
+        NetworkManager.shared.service_GetFollowerList(for: userName, page: page) { [weak self] result in
             guard let self = self else { return }
+            self.hideLoading()
             switch result {
             case .failure(let error ):
                 self.showGFAlertOnMainThread(title: "API error", message: error.rawValue, buttonTitle: "Ok")
             case .success(let listFollowers):
-                self.list_Followers = listFollowers
+                if listFollowers.count < 100 { self.hasMoreFollowers = false }
+                self.list_Followers.append(contentsOf: listFollowers)
+                if self.list_Followers.isEmpty {
+                    DispatchQueue.main.async {
+                        self.showEmptyStateView(with: "This User doesn't have any followers. Go follow them 😉", in: self.view)
+                    }
+                }
                 self.updateData()
-                dump(listFollowers)
             }
         }
     }
@@ -55,6 +65,7 @@ class FollowerListVC: UIViewController {
     func configCollectionView() {
         self.collectionView_Followers = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
         view.addSubview(collectionView_Followers)
+        collectionView_Followers.delegate = self
         collectionView_Followers.backgroundColor = .systemBackground
         collectionView_Followers.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.kIdentifier)
     }
@@ -73,6 +84,21 @@ class FollowerListVC: UIViewController {
         snapshot.appendItems(list_Followers)
         DispatchQueue.main.async {
             self.dataSourceDiff.apply(snapshot, animatingDifferences: true)
+        }
+    }
+}
+
+extension FollowerListVC: UICollectionViewDelegate
+{
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - height {
+            guard hasMoreFollowers else { return }
+            page += 1
+            loadData(userName: userName, page: page)
         }
     }
 }
