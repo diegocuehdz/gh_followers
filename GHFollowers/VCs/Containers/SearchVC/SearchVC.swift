@@ -89,6 +89,7 @@ class SearchVC: UIViewController
         vcFollowers.userName = searchUserName
         vcFollowers.title = searchUserName
         navigationController?.pushViewController(vcFollowers, animated: true)
+        tf_UserName.text = nil
     }
 }
 

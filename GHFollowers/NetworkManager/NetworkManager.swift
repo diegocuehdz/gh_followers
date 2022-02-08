@@ -6,22 +6,23 @@
 //  Copyright © 2022 Diego Cué Hernández. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class NetworkManager
 {
     static let shared = NetworkManager()
     private let baseURL = "https://api.github.com/users"
+    let cache = NSCache<NSString, UIImage>()
 
     private init() { }
     
-    func getFollowers(for username: String, page: Int, handler: @escaping (Result<[Follower], GFError>) -> Void) {
+    func service_GetFollowerList(for username: String, page: Int, handler: @escaping (Result<[Follower], GFError>) -> Void) {
         let endpoint = baseURL + "/\(username)/followers?per_page=100&page=\(page)"
         guard let url = URL(string: endpoint) else {
             handler(.failure(.errorInvalidUrl))
             return
         }
-        
+
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let _ = error {
                 handler(.failure(.errorUnableToComplete))
