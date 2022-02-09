@@ -8,23 +8,37 @@
 
 import UIKit
 
-class UserInfoVC: UIViewController {
-
+class UserInfoVC: UIViewController
+{
+    var username: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        configNavigationItem()
+        loadData(userName: username)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func configNavigationItem() {
+        view.backgroundColor = .systemBackground
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dimsissVC ))
+        navigationItem.rightBarButtonItem = doneButton
     }
-    */
+   
+    func loadData(userName: String) {
+        showLoading()
+        NetworkManager.shared.service_GetUser(for: userName) { [weak self] result in
+            guard let self = self else { return }
+            self.hideLoading()
+            switch result {
+            case .failure(let error ):
+                self.showGFAlertOnMainThread(title: "API error", message: error.rawValue, buttonTitle: "Ok")
+            case .success(let userReturn):
+                debugPrint(userReturn)
+            }
+        }
+    }
 
+    @objc func dimsissVC() {
+        dismiss(animated: true)
+    }
 }

@@ -29,6 +29,7 @@
 		F16ADA9D27B221390002E45E /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16ADA9C27B221390002E45E /* UIHelper.swift */; };
 		F16ADA9F27B2326B0002E45E /* GFEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16ADA9E27B2326B0002E45E /* GFEmptyStateView.swift */; };
 		F1C595FB26CDC89B0045AFBC /* FollowerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C595FA26CDC89B0045AFBC /* FollowerListVC.swift */; };
+		F1FD12B627B3775100373255 /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FD12B527B3775100373255 /* UserInfoVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		F16ADA9C27B221390002E45E /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		F16ADA9E27B2326B0002E45E /* GFEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFEmptyStateView.swift; sourceTree = "<group>"; };
 		F1C595FA26CDC89B0045AFBC /* FollowerListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListVC.swift; sourceTree = "<group>"; };
+		F1FD12B527B3775100373255 /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,27 +112,12 @@
 		F132B299240394EF005B302A /* Containers */ = {
 			isa = PBXGroup;
 			children = (
-				F1C595F926CDC8870045AFBC /* FollowerListVC */,
-				F132B29A240394FB005B302A /* SearchVC */,
-				F132B29D24039528005B302A /* FavoritesListVC */,
+				F132B29E2403953A005B302A /* FavoritesListVC.swift */,
+				F132B29B24039508005B302A /* SearchVC.swift */,
+				F1C595FA26CDC89B0045AFBC /* FollowerListVC.swift */,
+				F1FD12B527B3775100373255 /* UserInfoVC.swift */,
 			);
 			path = Containers;
-			sourceTree = "<group>";
-		};
-		F132B29A240394FB005B302A /* SearchVC */ = {
-			isa = PBXGroup;
-			children = (
-				F132B29B24039508005B302A /* SearchVC.swift */,
-			);
-			path = SearchVC;
-			sourceTree = "<group>";
-		};
-		F132B29D24039528005B302A /* FavoritesListVC */ = {
-			isa = PBXGroup;
-			children = (
-				F132B29E2403953A005B302A /* FavoritesListVC.swift */,
-			);
-			path = FavoritesListVC;
 			sourceTree = "<group>";
 		};
 		F132B2A024039AB8005B302A /* CustomViews */ = {
@@ -251,14 +238,6 @@
 			path = ImageViews;
 			sourceTree = "<group>";
 		};
-		F1C595F926CDC8870045AFBC /* FollowerListVC */ = {
-			isa = PBXGroup;
-			children = (
-				F1C595FA26CDC89B0045AFBC /* FollowerListVC.swift */,
-			);
-			path = FollowerListVC;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -340,6 +319,7 @@
 				F16ADA9027B1ED4C0002E45E /* User.swift in Sources */,
 				F16ADA9927B1FCE40002E45E /* FollowerCell.swift in Sources */,
 				F16ADA8727B1E2270002E45E /* UIViewController+Utils.swift in Sources */,
+				F1FD12B627B3775100373255 /* UserInfoVC.swift in Sources */,
 				F16ADA8E27B1EC890002E45E /* Follower.swift in Sources */,
 				F1C595FB26CDC89B0045AFBC /* FollowerListVC.swift in Sources */,
 				F16ADA8427B1DCE90002E45E /* GFAlertViewVC.swift in Sources */,
