@@ -33,6 +33,7 @@
 		F1FD12B927B37F5900373255 /* UserInfoHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FD12B827B37F5900373255 /* UserInfoHeaderVC.swift */; };
 		F1FD12BB27B3800D00373255 /* GFSecondaryTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FD12BA27B3800D00373255 /* GFSecondaryTitleLabel.swift */; };
 		F1FD12BD27B3852000373255 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FD12BC27B3852000373255 /* Constants.swift */; };
+		F1FD12BF27B38D5500373255 /* GFItemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FD12BE27B38D5500373255 /* GFItemInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		F1FD12B827B37F5900373255 /* UserInfoHeaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeaderVC.swift; sourceTree = "<group>"; };
 		F1FD12BA27B3800D00373255 /* GFSecondaryTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFSecondaryTitleLabel.swift; sourceTree = "<group>"; };
 		F1FD12BC27B3852000373255 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F1FD12BE27B38D5500373255 /* GFItemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFItemInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 			children = (
 				F16ADA9E27B2326B0002E45E /* GFEmptyStateView.swift */,
 				F16ADA8A27B1E6AF0002E45E /* GFContainerView.swift */,
+				F1FD12BE27B38D5500373255 /* GFItemInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				F16ADA9D27B221390002E45E /* UIHelper.swift in Sources */,
 				F16ADA9327B1F0420002E45E /* NetworkManager.swift in Sources */,
 				F132B28724038DFA005B302A /* SceneDelegate.swift in Sources */,
+				F1FD12BF27B38D5500373255 /* GFItemInfoView.swift in Sources */,
 				F16ADA8B27B1E6AF0002E45E /* GFContainerView.swift in Sources */,
 				F1FD12BD27B3852000373255 /* Constants.swift in Sources */,
 			);
