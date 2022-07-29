@@ -58,7 +58,7 @@ class UserInfoHeaderVC: UIViewController
     }
     
     func layoutUI() {
-//        let padding: CGFloat = 20
+        let padding: CGFloat = 20
         let textImagePadding: CGFloat = 12
         img_Location.translatesAutoresizingMaskIntoConstraints = false
         
@@ -70,12 +70,12 @@ class UserInfoHeaderVC: UIViewController
             
             lb_UserName.topAnchor.constraint(equalTo: img_Avatar.topAnchor),
             lb_UserName.leadingAnchor.constraint(equalTo: img_Avatar.trailingAnchor, constant: textImagePadding),
-            lb_UserName.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            lb_UserName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             lb_UserName.heightAnchor.constraint(equalToConstant: 38),
             
             lb_Name.centerYAnchor.constraint(equalTo: img_Avatar.centerYAnchor, constant: 8),
             lb_Name.leadingAnchor.constraint(equalTo: img_Avatar.trailingAnchor, constant: textImagePadding),
-            lb_Name.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            lb_Name.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             lb_Name.heightAnchor.constraint(equalToConstant: 20),
 
             img_Location.bottomAnchor.constraint(equalTo: img_Avatar.bottomAnchor),
@@ -85,13 +85,12 @@ class UserInfoHeaderVC: UIViewController
             
             lb_Location.centerYAnchor.constraint(equalTo: img_Location.centerYAnchor),
             lb_Location.leadingAnchor.constraint(equalTo: img_Location.trailingAnchor, constant: 5),
-            lb_Location.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            lb_Location.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             lb_Location.heightAnchor.constraint(equalToConstant: 20),
             
             lb_Bio.topAnchor.constraint(equalTo: img_Avatar.bottomAnchor, constant: textImagePadding),
             lb_Bio.leadingAnchor.constraint(equalTo: img_Avatar.leadingAnchor),
-            lb_Bio.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            lb_Location.heightAnchor.constraint(equalToConstant: 60),
+            lb_Bio.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
         ])
     }
 }

@@ -8,14 +8,24 @@
 
 import UIKit
 
+protocol UserInfoVCDelegate: AnyObject
+{
+    func didTapGitHubProfile(user: User)
+    func didTapGetFollowers(user: User)
+}
+
 class UserInfoVC: UIViewController
 {
+    weak var delegate: FollowerListVCDelegate?
+    
     var username: String!
     var user: User!
     
     let view_Header = UIView()
     let view_ItemOne = UIView()
     let view_ItemTwo = UIView()
+    let lb_Date = GFBodyLabel(textAlignment: .center)
+    
     
     var list_Views: [UIView] = []
     
@@ -29,7 +39,7 @@ class UserInfoVC: UIViewController
     private func layoutUI() {
         let padding: CGFloat = 20
         let itemHeight: CGFloat = 140
-        list_Views = [view_Header, view_ItemOne, view_ItemTwo]
+        list_Views = [view_Header, view_ItemOne, view_ItemTwo, lb_Date]
         
         for viewItem in list_Views {
             self.view.addSubview(viewItem)
@@ -41,9 +51,6 @@ class UserInfoVC: UIViewController
             ])
         }
         
-        view_ItemOne.backgroundColor = .blue
-        view_ItemTwo.backgroundColor = .cyan
-        
         NSLayoutConstraint.activate([
             view_Header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
             view_Header.heightAnchor.constraint(equalToConstant: 180),
@@ -52,12 +59,25 @@ class UserInfoVC: UIViewController
             view_ItemOne.heightAnchor.constraint(equalToConstant: itemHeight),
             
             view_ItemTwo.topAnchor.constraint(equalTo: view_ItemOne.bottomAnchor, constant: padding),
-            view_ItemTwo.heightAnchor.constraint(equalToConstant: itemHeight)
+            view_ItemTwo.heightAnchor.constraint(equalToConstant: itemHeight),
+            
+            lb_Date.topAnchor.constraint(equalTo: view_ItemTwo.bottomAnchor, constant: padding),
+            lb_Date.heightAnchor.constraint(equalToConstant: 18)
         ])
     }
     
-    private func addSubViews() {
-        self.addChildVC(UserInfoHeaderVC(user: self.user), to: view_Header)
+    private func addSubViewsWith(user: User) {
+        
+        let vcRepoItem = GFRepoItemVC.init(user: user)
+        vcRepoItem.delegate = self
+        
+        let vcFollowersItem = GFFollowerItemVC.init(user: user)
+        vcFollowersItem.delegate = self
+        
+        self.lb_Date.text = "Github since \(user.createdAt.converToDisplayFormat())"
+        self.addChildVC(UserInfoHeaderVC(user: user), to: view_Header)
+        self.addChildVC(vcRepoItem, to: view_ItemOne)
+        self.addChildVC(vcFollowersItem, to: view_ItemTwo)
     }
     
     private func addChildVC(_ childVC: UIViewController, to containerView: UIView) {
@@ -83,14 +103,35 @@ class UserInfoVC: UIViewController
                 self.showGFAlertOnMainThread(title: "API error", message: error.rawValue, buttonTitle: "Ok")
             case .success(let userReturn):
                 self.user = userReturn
-                DispatchQueue.main.async {
-                    self.addSubViews()
-                }
+                DispatchQueue.main.async { self.addSubViewsWith(user: self.user) }
             }
         }
     }
     
     @objc func dimsissVC() {
         dismiss(animated: true)
+    }
+}
+
+extension UserInfoVC: UserInfoVCDelegate
+{
+    func didTapGetFollowers(user: User) {
+        guard user.followers != 0 else {
+            showGFAlertOnMainThread(title: "Now Followers", message: "This user has no followers.", buttonTitle: "Ok")
+            return
+        }
+        
+        dismiss(animated: true) {
+            self.delegate?.didRequestFollowers(userName: user.login)
+        }
+    }
+    
+    func didTapGitHubProfile(user: User) {
+        guard let url = URL(string: user.htmlUrl) else {
+            showGFAlertOnMainThread(title: "Invalid URL", message: "The URL attached for this user is not valid", buttonTitle: "Ok")
+            return
+        }
+        
+        presentSafariVC(url: url)
     }
 }
