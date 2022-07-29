@@ -8,8 +8,14 @@
 
 import UIKit
 
-class FollowerListVC: UIViewController {
-    
+protocol FollowerListVCDelegate: AnyObject
+{
+    func didRequestFollowers(userName: String)
+}
+
+
+class FollowerListVC: UIViewController
+{
     enum CollectionSectionDefault { case main }
     
     
@@ -22,6 +28,7 @@ class FollowerListVC: UIViewController {
     
     var page: Int = 1
     var hasMoreFollowers = true
+    var isSearching = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,17 +121,41 @@ extension FollowerListVC: UICollectionViewDelegate
             loadData(userName: userName, page: page)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let followerSelected = (isSearching ? list_FollowersFiltered : list_Followers)[indexPath.item]
+        let vcUserInfo = UserInfoVC()
+        vcUserInfo.delegate = self
+        vcUserInfo.username = followerSelected.login
+        let navController = UINavigationController(rootViewController: vcUserInfo)
+        present(navController, animated: true)
+    }
 }
 
 extension FollowerListVC: UISearchResultsUpdating, UISearchBarDelegate
 {
     func updateSearchResults(for searchController: UISearchController) {
         guard let filter = searchController.searchBar.text, !filter.isEmpty else { return }
+        isSearching = true
         list_FollowersFiltered = list_Followers.filter { $0.login.lowercased().contains(filter.lowercased()) }
         updateData(on: list_FollowersFiltered)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isSearching = false
         updateData(on: self.list_Followers)
+    }
+}
+
+extension FollowerListVC: FollowerListVCDelegate
+{
+    func didRequestFollowers(userName: String) {
+        self.userName = userName
+        title = userName
+        page = 1
+        list_Followers.removeAll()
+        list_FollowersFiltered.removeAll()
+        
+        loadData(userName: userName, page: 1)
     }
 }
